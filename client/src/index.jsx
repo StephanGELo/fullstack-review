@@ -16,11 +16,11 @@ class App extends React.Component {
   search (term) {
     console.log(`${term} was searched`);
     // TODO
-    var username = {'username': `${term}`};
+    var username = {username: `${term}`};
     $.ajax({
       url:'/repos',
-      method: 'POST',
-      data: username,
+      type: 'POST',
+      data: JSON.stringify(username),
       contentType: 'application/json',
       success: (data) => {
        console.log("username was sent successfully", data);
@@ -28,7 +28,7 @@ class App extends React.Component {
        console.log('on line 28', this.state.repos);
       },
       error: (err) => {
-       console.error(err);
+       console.error("Client side line 31", err);
       }
     })
   }
