@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+//const uniqueValidator = require('mongoose-unique-validator');
 mongoose.connect('mongodb://localhost/fetcher');
 
 //Defining a schema using mongoose
@@ -13,23 +14,32 @@ let repoSchema = mongoose.Schema({
   login: String,
   html_url: String,
   repos: {
-    id: Number,
+    id: {type:Number, index: {unique: true}},
     name: String,
     full_name: String,
     forks: Number
   }
 });
+//repoSchema.plugin(uniqueValidator);
 
 //To use our schema definition, 
 //we need to convert our blogSchema 
 //into a Model we can work with
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (err, Repo) => {
-  // TODO: Your code here
+let save = (data) => {
+   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
-  if (err) return console.error(err);
+  var repo = new Repo (data);
+  // if repo.
+  repo.save((err)=> {
+    if (err) {
+      return handleError(err);
+    } 
+  });
+  //HOW TO HANDLE SAVE MORE THAN ONE REPO HERE?
+  
 };
 
 module.exports.save = save;

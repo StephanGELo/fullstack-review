@@ -25,7 +25,7 @@ class App extends React.Component {
       success: (data) => {
        console.log("username was sent successfully", data);
        //this.setState({repos: data});
-       console.log('on line 28', this.state.repos);
+       //console.log('on line 28', this.state.repos);
       },
       error: (err) => {
        console.error("Client side line 31", err);
